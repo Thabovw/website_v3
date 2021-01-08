@@ -48,8 +48,8 @@ social:
 - icon: osf
   icon_pack: fab
   link: https://osf.io/vnqcr/
-- icon: researchgate
-  icon_pack: fab
+- icon: product-hunt
+  icon_pack: fas
   link: https://publons.com/researcher/1561929/thabo-van-woudenberg/
 
 superuser: true
