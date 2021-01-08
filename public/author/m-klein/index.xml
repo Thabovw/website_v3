@@ -5,7 +5,7 @@
     <link>https://www.tvanwoudenberg.com/author/m-klein/</link>
       <atom:link href="https://www.tvanwoudenberg.com/author/m-klein/index.xml" rel="self" type="application/rss+xml" />
     <description>M Klein</description>
-    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><copyright>Thabo J. van Woudenberg © 2020</copyright><lastBuildDate>Mon, 05 Aug 2019 00:00:00 +0000</lastBuildDate>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><copyright>Thabo J. van Woudenberg © 2020</copyright><lastBuildDate>Mon, 19 Aug 2019 00:00:00 +0000</lastBuildDate>
     <image>
       <url>https://www.tvanwoudenberg.com/images/icon_hu0b7a4cb9992c9ac0e91bd28ffd38dd00_9727_512x512_fill_lanczos_center_2.png</url>
       <title>M Klein</title>
@@ -13,7 +13,15 @@
     </image>
     
     <item>
-      <title>Identifying influence agents that promote physical activity through the simulation of social network interventions; Agent-based modeling study</title>
+      <title>Parameter Optimization for Deriving Bluetooth-Based Social Network Graphs</title>
+      <link>https://www.tvanwoudenberg.com/publication/simoski_2019_parameter/</link>
+      <pubDate>Mon, 19 Aug 2019 00:00:00 +0000</pubDate>
+      <guid>https://www.tvanwoudenberg.com/publication/simoski_2019_parameter/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Identifying Influence Agents that Promote Physical Activity Through the Simulation of Social Network Interventions; Agent-Based Modeling Study</title>
       <link>https://www.tvanwoudenberg.com/publication/van_woudenberg_2019_simulations/</link>
       <pubDate>Mon, 05 Aug 2019 00:00:00 +0000</pubDate>
       <guid>https://www.tvanwoudenberg.com/publication/van_woudenberg_2019_simulations/</guid>
@@ -25,19 +33,7 @@
       <link>https://www.tvanwoudenberg.com/publication/araujo_2018_pa_simulations/</link>
       <pubDate>Sun, 01 Jul 2018 00:00:00 +0000</pubDate>
       <guid>https://www.tvanwoudenberg.com/publication/araujo_2018_pa_simulations/</guid>
-      <description>&lt;div class=&#34;alert alert-note&#34;&gt;
-  &lt;div&gt;
-    Click the &lt;em&gt;Cite&lt;/em&gt; button above to demo the feature to enable visitors to import publication metadata into their reference management software.
-  &lt;/div&gt;
-&lt;/div&gt;
-&lt;div class=&#34;alert alert-note&#34;&gt;
-  &lt;div&gt;
-    Click the &lt;em&gt;Slides&lt;/em&gt; button above to demo Academic&amp;rsquo;s Markdown slides feature.
-  &lt;/div&gt;
-&lt;/div&gt;
-&lt;p&gt;Supplementary notes can be added here, including 
-&lt;a href=&#34;https://sourcethemes.com/academic/docs/writing-markdown-latex/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;code and math&lt;/a&gt;.&lt;/p&gt;
-</description>
+      <description></description>
     </item>
     
   </channel>

@@ -5,7 +5,7 @@
     <link>https://www.tvanwoudenberg.com/talk/</link>
       <atom:link href="https://www.tvanwoudenberg.com/talk/index.xml" rel="self" type="application/rss+xml" />
     <description>Recent &amp; Upcoming Talks</description>
-    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><copyright>Thabo J. van Woudenberg © 2020</copyright><lastBuildDate>Sat, 01 Jun 2030 13:00:00 +0000</lastBuildDate>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><copyright>Thabo J. van Woudenberg © 2020</copyright><lastBuildDate>Thu, 16 Jul 2020 17:00:00 +0000</lastBuildDate>
     <image>
       <url>https://www.tvanwoudenberg.com/images/icon_hu0b7a4cb9992c9ac0e91bd28ffd38dd00_9727_512x512_fill_lanczos_center_2.png</url>
       <title>Recent &amp; Upcoming Talks</title>
@@ -13,25 +13,107 @@
     </image>
     
     <item>
-      <title>Example Talk</title>
-      <link>https://www.tvanwoudenberg.com/talk/example/</link>
-      <pubDate>Sat, 01 Jun 2030 13:00:00 +0000</pubDate>
-      <guid>https://www.tvanwoudenberg.com/talk/example/</guid>
-      <description>&lt;div class=&#34;alert alert-note&#34;&gt;
-  &lt;div&gt;
-    Click on the &lt;strong&gt;Slides&lt;/strong&gt; button above to view the built-in slides feature.
-  &lt;/div&gt;
-&lt;/div&gt;
-&lt;p&gt;Slides can be added in a few ways:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;Create&lt;/strong&gt; slides using Academic&amp;rsquo;s 
-&lt;a href=&#34;https://sourcethemes.com/academic/docs/managing-content/#create-slides&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;&lt;em&gt;Slides&lt;/em&gt;&lt;/a&gt; feature and link using &lt;code&gt;slides&lt;/code&gt; parameter in the front matter of the talk file&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;Upload&lt;/strong&gt; an existing slide deck to &lt;code&gt;static/&lt;/code&gt; and link using &lt;code&gt;url_slides&lt;/code&gt; parameter in the front matter of the talk file&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;Embed&lt;/strong&gt; your slides (e.g. Google Slides) or presentation video on this page using 
-&lt;a href=&#34;https://sourcethemes.com/academic/docs/writing-markdown-latex/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;shortcodes&lt;/a&gt;.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;Further talk details can easily be added to this page using &lt;em&gt;Markdown&lt;/em&gt; and $\rm \LaTeX$ math code.&lt;/p&gt;
-</description>
+      <title>Selection and Influence Effects on Physical Activity in Adolescents’ Social Networks</title>
+      <link>https://www.tvanwoudenberg.com/talk/sunbelt20/</link>
+      <pubDate>Thu, 16 Jul 2020 17:00:00 +0000</pubDate>
+      <guid>https://www.tvanwoudenberg.com/talk/sunbelt20/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>AI for Effective and Responsible Social Network Campaigns</title>
+      <link>https://www.tvanwoudenberg.com/talk/ecda2020/</link>
+      <pubDate>Wed, 03 Jun 2020 09:00:00 +0000</pubDate>
+      <guid>https://www.tvanwoudenberg.com/talk/ecda2020/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Selection and Influence Effects on Physical Activity in Adolescents’ Social Networks</title>
+      <link>https://www.tvanwoudenberg.com/talk/etmaal2020/</link>
+      <pubDate>Fri, 07 Feb 2020 10:45:00 +0000</pubDate>
+      <guid>https://www.tvanwoudenberg.com/talk/etmaal2020/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Promoting Adolescents Physical Activity through Social Network Interventions</title>
+      <link>https://www.tvanwoudenberg.com/talk/prague19/</link>
+      <pubDate>Tue, 18 Jun 2019 13:30:00 +0000</pubDate>
+      <guid>https://www.tvanwoudenberg.com/talk/prague19/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Jongeren zelf vlogs laten maken over sporten en bewegen, werkt dat?</title>
+      <link>https://www.tvanwoudenberg.com/talk/aruba19/</link>
+      <pubDate>Wed, 03 Apr 2019 16:50:00 +0000</pubDate>
+      <guid>https://www.tvanwoudenberg.com/talk/aruba19/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Testing a Social Network Vlog Intervention to Promote Physical Activity Among Adolescents - A Randomized Controlled Trial</title>
+      <link>https://www.tvanwoudenberg.com/talk/ispah18/</link>
+      <pubDate>Tue, 16 Oct 2018 13:30:00 +0000</pubDate>
+      <guid>https://www.tvanwoudenberg.com/talk/ispah18/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>De resultaten van drie jaar lang MyMovez op het Stedelijk Gymnasium Nijmegen</title>
+      <link>https://www.tvanwoudenberg.com/talk/ouderavondgymnasiumt/</link>
+      <pubDate>Thu, 13 Sep 2018 19:30:00 +0000</pubDate>
+      <guid>https://www.tvanwoudenberg.com/talk/ouderavondgymnasiumt/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>A Randomized Controlled Trial Testing a Social Network Intervention to Promote Physical Activity Among Adolescents by using Smartphones</title>
+      <link>https://www.tvanwoudenberg.com/talk/hepa17/</link>
+      <pubDate>Fri, 17 Nov 2017 16:00:00 +0000</pubDate>
+      <guid>https://www.tvanwoudenberg.com/talk/hepa17/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Social network intervention to promote physical activity in youth</title>
+      <link>https://www.tvanwoudenberg.com/talk/bsi17/</link>
+      <pubDate>Fri, 16 Jun 2017 09:30:00 +0000</pubDate>
+      <guid>https://www.tvanwoudenberg.com/talk/bsi17/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Similarity of physical activity in youngsters’ social networks. Selection or Influence?</title>
+      <link>https://www.tvanwoudenberg.com/talk/isbnpa17/</link>
+      <pubDate>Mon, 08 May 2017 16:00:00 +0000</pubDate>
+      <guid>https://www.tvanwoudenberg.com/talk/isbnpa17/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Assessing influence of peer interaction on physical activity among youth by measuring peer proximity with mobile technology</title>
+      <link>https://www.tvanwoudenberg.com/talk/ispah16/</link>
+      <pubDate>Fri, 18 Nov 2016 15:00:00 +0000</pubDate>
+      <guid>https://www.tvanwoudenberg.com/talk/ispah16/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Het gebruik van mobiele technologie ter bevordering van fysieke activiteit en gezondheid.</title>
+      <link>https://www.tvanwoudenberg.com/talk/gymmentoekomst2015/</link>
+      <pubDate>Tue, 03 Nov 2015 09:00:00 +0000</pubDate>
+      <guid>https://www.tvanwoudenberg.com/talk/gymmentoekomst2015/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Social network implemented health campaign to promote physical activity among youth</title>
+      <link>https://www.tvanwoudenberg.com/talk/phd15/</link>
+      <pubDate>Fri, 23 Oct 2015 09:00:00 +0000</pubDate>
+      <guid>https://www.tvanwoudenberg.com/talk/phd15/</guid>
+      <description></description>
     </item>
     
     <item>
