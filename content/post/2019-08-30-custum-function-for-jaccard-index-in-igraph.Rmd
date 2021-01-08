@@ -1,0 +1,265 @@
+---
+title: Custom function for Jaccard Index in Igraph
+author: T van WOudenberg
+date: '2019-08-30'
+slug: custom-function-for-jaccard-index-in-igraph
+categories:
+  - Scripts
+tags:
+  - Igraph
+  - Jaccard index
+  - Scripts
+header:
+  caption: ''
+  image: 'office.jpg'
+  preview: no
+---
+
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(collapse = TRUE)
+```
+
+Hi all! 
+
+I while ago, I had the problem that I wanted to compare the edges between two different time points, but also the edges of different types of networks. To be more specific, I wanted to compare:
+
+- The edges of the same network between different waves
+- The edges in social network based on a nomination question ("With whom do you spend time during the breaks at school") to the edges based on Bluetooth connects of participants' smartphones 
+
+For more information, see the [protocol paper of the project](https://bmcpublichealth.biomedcentral.com/articles/10.1186/s12889-018-5353-5#Sec4)
+
+However, I could not find a function in the igrapgh package that I could use for this. Therefore, I created a custom function that i want to share with you: 
+
+```{r, echo=TRUE}
+# Function for Jaccard index
+jaccard_index<-function(g1,g2) {
+  library(igraph)
+  g1<-get.adjacency(g1)
+  g1[g1 > 0.001] <- 1
+  g2<-get.adjacency(g2)
+  g2[g2 > 0.001] <- 1
+  A<-sum(g1 != g2) # edges that changed (0->1 and 1->0)
+  B<-sum(g1 * g2) # edges that have a 1 in M1 and 1 in M2, so stayed the same (1->1)
+  return(round(B/sum(A,B),digits = 2)) # the ratio of stable ties ties (B), compared to all ties who change (A) + stable ties (B)
+  on.exit(rm(A,B))
+}
+```
+
+I can understand that you think this doesn't work. So let me show you.
+
+I first created an empty matrix from ten by ten (as if there are 10 participants in this network), and randomly added 13 edges.
+
+```{r, echo=TRUE}
+set.seed(1337)
+Test_Network_1<-matrix(nrow = 10, ncol = 10)    # 1 row and 1 column per participant
+for (i in sample(1:10,13,replace=T)) {          # randomly select a number between 1 and 10, and the same numbers can be used multiple times. We do this 13 times 
+  Test_Network_1[i,sample(1:10,1,replace=T)]<-1 # for each randomly selected participant, randomly assign and alter (again, between 1 and 10) to create an edge
+}
+
+```
+
+Let us inspect the matrix and count the number of nominations in this matrix by hand (should be 13).
+
+```{r, echo=TRUE} 
+print(Test_Network_1)
+```
+
+Or ask R to do it for us.
+
+```{r, echo=TRUE} 
+sum(Test_Network_1,na.rm=TRUE)
+```
+
+
+The make a partial overlapping network, we use the first example matrix and create a second:
+
+``` {r, echo=TRUE }
+Test_Network_2<-Test_Network_1
+```
+
+But these matrices will be identical! Therefore, so let's delete some edges in both the networks.
+
+```{r, echo=TRUE }
+# delete some edges in the first network
+Test_Network_1[2,8]<-NA
+Test_Network_1[10,2]<-NA
+Test_Network_1[9,9]<-NA
+
+# delete some edges in the second network
+Test_Network_2[3,3]<-NA
+Test_Network_2[4,4]<-NA
+Test_Network_2[3,6]<-NA
+Test_Network_2[8,5]<-NA
+```
+
+The first network should have 10 edges: 13 original edges, but we deleted 3 of them
+
+The second network should have 9: 13 original edges, but we deleted 4 of them
+
+
+
+```{r, echo=TRUE}
+# sum of network 1 should be 13-3 = 10
+sum(Test_Network_1,na.rm=TRUE)
+
+# sum of network 2 should be 13-4 = 9
+sum(Test_Network_2,na.rm=TRUE)
+```
+
+This means that networks share 6 edges: 13 original edges, deleted 3 and 4 of them.
+
+And if we know the shared edges, we also know the unique edges per network:
+
+```{r, echo=TRUE}
+# sum of edges in both graphs should be 13-3-4 = 6
+sum(Test_Network_1==Test_Network_2,na.rm=TRUE)
+
+# the first example network
+sum(Test_Network_1,na.rm=TRUE)-sum(Test_Network_1==Test_Network_2,na.rm=TRUE)
+
+# the second example network
+sum(Test_Network_2,na.rm=TRUE)-sum(Test_Network_1==Test_Network_2,na.rm=TRUE)
+```
+
+
+OK, so there are: 
+
++ 6 shared edges
++ 4 unique edges in network 1 
++ 3 unique edges in network 2
+
+If we would calculate the Jaccard index by hand:
+```{r, echo =TRUE }
+# plug in the numbers
+shared <-6
+unique_N1<-4
+unique_N2<-3
+
+# calculate the ratio of share edges in comparison to all edges:
+shared/(shared+unique_N1+unique_N2)
+```
+
+The result is that 46.15% of all edges is observed in both networks
+
+Now lets see if the custom function produces the same number for the Igraph objects
+We have the example matrices, let's make two igraph objects:
+
+```{r, echo=TRUE}
+# make a network out of the matrices
+library(igraph)
+Test_Graph_1<-graph_from_adjacency_matrix(Test_Network_1, mode = c("directed"))
+Test_Graph_2<-graph_from_adjacency_matrix(Test_Network_2, mode = c("directed"))
+```
+
+Let's see whether the example script works:
+
+```{r, echo=TRUE }
+# test of the function
+jaccard_index(Test_Graph_1,Test_Graph_2)
+```
+
+<p align= "center">
+  <img src="https://media.giphy.com/media/ZdFxoPhIS4glG/giphy.gif" width="400" height="200">
+</p>
+
+*Apparently, you have to put gifs in your Rscripts. I like this one because the girl is hardcore.* 
+
+### Weighted networks
+
+That is nice and all, but wat about waited networks? Also, I also wanted to understand where the changes between the ties were coming from. In other words, is one network overestimating the other?
+ 
+
+The second custom function:
+
+```{r, echo=TRUE}
+jaccard_change<-function(g1,g2) {
+  library(igraph)
+  g1<-get.adjacency(g1)
+  g1[g1 > 0.001] <- 1
+  g2<-get.adjacency(g2)
+  g2[g2 > 0.001] <- 1
+  Title<-"Numbers represent edges"
+  Left<-sum(g1 > g2) # edges that changed (1->0)
+  Right<-sum(g1 < g2) # edges that changed (0->1)
+  Both<-sum(g1 * g2) # edges that have a 1 in M1 and 1 in M2, so stayed the same (1->1)
+  Index<-round(Both/sum(Left,Right,Both),digits = 2) # the ratio of stable ties ties (B), compared to all ties who change (A) + stable ties (B)
+  Results<-return(structure(list(Title,Index,Left,Right,Both),names=c("Title","Jaccard_Index","Left_Network_Only", "Right_Network_Only", "Both_Networks")))
+  on.exit(rm(Left,Right,Both,Index))
+}
+```
+
+First, let's test the weighted networks. We make a new network based on the first one
+
+``` {r, echo=TRUE }
+Test_Network_3<-Test_Network_1
+print(Test_Network_3)
+```
+
+now we will give the some existing edges some more weight
+
+``` {r, echo=TRUE }
+Test_Network_3[1,7]<-2
+Test_Network_3[6,2]<-3
+Test_Network_3[9,3]<-4
+
+# show the new network
+print(Test_Network_3)
+```
+
+Make an Igraph object
+
+``` {r, echo=TRUE }
+Test_Graph_3<-graph_from_adjacency_matrix(Test_Network_3, mode = c("directed"))
+```
+
+This network is identical in the edges, except that some of the edges have a different weight. 
+
+The Jaccard index should be 1, given that all the edges appear in both networks.
+
+``` {r, echo=TRUE }
+jaccard_change(Test_Graph_1,Test_Graph_3)
+```
+
+It works!
+
+Now add some more edges to the third example network
+
+``` {r, echo=TRUE }
+Test_Network_3[1,2]<-4
+Test_Network_3[3,5]<-2
+Test_Network_3[6,10]<-3
+
+# show the new network
+print(Test_Network_3)
+```
+
+The third network (right in the function) will now have three unique edges that are not in the first example network (left network)
+
+``` {r, echo=TRUE }
+Test_Graph_3<-graph_from_adjacency_matrix(Test_Network_3, mode = c("directed"))
+
+jaccard_change(Test_Graph_1,Test_Graph_3)
+```
+
+The output tells us what we want to hear: 
+
++ 10 shared edges
++ 0 unique edges in network 1 (the left network) 
++ 3 unique edges in network 2 (the right network)
+
+```{r, echo =TRUE }
+# plug in the numbers
+shared <-10
+unique_N1<-3
+unique_N2<-0
+
+# calculate the ratio of share edges in comparison to all edges:
+shared/(shared+unique_N1+unique_N2)
+```
+Fiewww, still the correct Jaccard index. Time for my holiday!
+
+<p align= "center">
+  <img src="https://media.giphy.com/media/VWIMImeOgPZTi/giphy.gif" width="400" height="200">
+</p>
+

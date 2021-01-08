@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>P Ketelaar | Thabo J. van Woudenberg</title>
+    <link>https://www.tvanwoudenberg.com/author/p-ketelaar/</link>
+      <atom:link href="https://www.tvanwoudenberg.com/author/p-ketelaar/index.xml" rel="self" type="application/rss+xml" />
+    <description>P Ketelaar</description>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><copyright>Thabo J. van Woudenberg © 2020</copyright><lastBuildDate>Tue, 01 Aug 2017 00:00:00 +0000</lastBuildDate>
+    <image>
+      <url>https://www.tvanwoudenberg.com/images/icon_hu0b7a4cb9992c9ac0e91bd28ffd38dd00_9727_512x512_fill_lanczos_center_2.png</url>
+      <title>P Ketelaar</title>
+      <link>https://www.tvanwoudenberg.com/author/p-ketelaar/</link>
+    </image>
+    
+    <item>
+      <title>Opening location-based mobile ads - How openness and location congruency of location-based ads weaken negative effects of intrusiveness on brand choice</title>
+      <link>https://www.tvanwoudenberg.com/publication/ketelaar_2018_opening/</link>
+      <pubDate>Tue, 01 Aug 2017 00:00:00 +0000</pubDate>
+      <guid>https://www.tvanwoudenberg.com/publication/ketelaar_2018_opening/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Disentangling location-based advertising the effects of location congruency and medium type on consumers’ ad attention and brand choice</title>
+      <link>https://www.tvanwoudenberg.com/publication/ketelaar_2017_disentangling/</link>
+      <pubDate>Sun, 01 Jan 2017 00:00:00 +0000</pubDate>
+      <guid>https://www.tvanwoudenberg.com/publication/ketelaar_2017_disentangling/</guid>
+      <description></description>
+    </item>
+    
+  </channel>
+</rss>

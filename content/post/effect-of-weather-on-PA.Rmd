@@ -1,0 +1,352 @@
+---
+title: The effect of the weather on adolescents' physical activity.
+author: T van WOudenberg
+date: '2020-03-05'
+slug: weather-on-PA
+categories:
+  - Scripts
+tags:
+  - Physcial Activity
+  - Weather
+  - Rain
+  - Sunshine
+  - Precipitation
+  - Children
+  - Adolescents
+  - lme4
+  - Mixed effects models
+header:
+  caption: 'Photo by Zach Reiner @ unsplash.com'
+  image: 'rain.png'
+  preview: no
+---
+
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(collapse = TRUE)
+```
+
+Hi all! 
+
+While I'm a writing this blog, I'm sitting in the train. Soaked... again. It has been raining for quite some weeks now and the weather report doesn't give me much hope for the next weeks. I certainly don't want to go outside to train for the half-marathon. To make myself a little less depressed, I think it is time for a new blog. 
+
+In this blog, I wanted to see whether I am the only one, or whether the kids in the [MyMovez project](https://bmcpublichealth.biomedcentral.com/articles/10.1186/s12889-018-5353-5#Sec4){target="_blank"} sample also are less physically active on rainy days.
+
+
+<p align= "center">
+  <img src="https://media.giphy.com/media/129BtnUUD6Lrzi/giphy.gif" width="400" height="200">
+</p>
+
+
+But before we start, first let is get in the mood by playing the sound on [this website](https://rainymood.com/){target="_blank"}.
+
+### The data
+
+The data of the project is publicly available, [clickettyclickclick](https://easy.dans.knaw.nl/ui/datasets/id/easy-dataset:155345){target="_blank"}. In addition, the KNMI (Royal Netherlands Meteorological Institute) shares the day-to-day weather data on [their website](http://projects.knmi.nl/klimatologie/daggegevens/selectie.cgi){target="_blank"}. For a conference poster, I downloaded the data from 27-01-2016 until 04-07-2018. This data is already merged to the physical activity data, so you don't have to do this yourself.
+
+The first step is to load the downloaded MyMovez data. More specifically, we unzip the file and only need the physical activity data that is stored in the folder "5. Fitbit data". 
+Let's see what type of data we have here...
+
+```{r, echo=FALSE}
+# load the relevant packages
+library(tidyverse)
+
+# Load the dataset
+FB<-read.csv2("C:/Users/u973123/SandI- trein/02_MyMovez/5. Fitbit data/Fitbit_W17_cleaned_imputation.csv")
+
+FB%>%
+  distinct(Date) %>%
+  summarize(number_of_dates = n()) # 224 dates
+
+# Print out all the dates
+print(head(FB %>% distinct(Date)))
+print(tail(FB %>% distinct(Date)))
+```
+
+
+Apparently, there is something wrong with three dates: 18-5-2018 until 20-5-2018 are stored in a different format. Let's re-code them	
+
+```{r, echo=TRUE}
+FB<-FB %>%
+  mutate(Date=recode(Date, 
+                     '18-5-2018' = "2018-05-18",
+                     '19-5-2018' = "2018-05-19",
+                     '20-5-2018' = "2018-05-20"))
+
+FB%>%
+  distinct(Date) %>%
+  summarize(number_of_dates = n()) # 221 dates
+```
+
+The factor 'Date' is correct now, so we can make it a date variable. For this we will use the lubridate package.
+
+```{r, echo=TRUE}
+library(lubridate)
+
+FB <- FB %>%
+  mutate(LDate = lubridate::date(Date))
+
+FB %>% 
+  select(LDate) %>%
+  summarize(begin = min(LDate),
+            end = max(LDate))
+```
+
+Indeed the first day of data is 27th of January 2016 and the last date is the 4th of July in 2018. 
+
+
+<p align= "center">
+  <img src="https://media.giphy.com/media/1lk1IcVgqPLkA/giphy.gif" width="400" height="200">
+</p>
+
+
+### Manipulating the data
+
+In this blog, I want to make two new variables. One that informs us what year it is, the other the day number in that year. For example, 4th of July in 2018 is in the year 2018 (duh) and the 4th of July is the ...
+
+```{r, echo=TRUE}
+lubridate::yday("2018-07-04")
+```
+
+... 185th day of the year of course. I knew that. this function is not on the [cheatsheet](https://evoldyn.gitlab.io/evomics-2018/ref-sheets/R_lubridate.pdf){target="_blank"}, but believe me, it works.
+
+We can use the same function for all the dates:
+
+```{r, echo=TRUE}
+FB <- FB %>%
+  mutate(Year = lubridate::year(LDate),      # this is the year
+         YDay = lubridate::yday(LDate)) %>%  # this is the number of day in that year
+  mutate(YearF = as.factor(Year))            # make the year a factor
+```
+
+Let's see how many data-points per day we have.
+
+```{r, fig.align='center', echo=TRUE}
+library(ggplot2)
+
+ggplot(data = FB, aes(x = YDay, fill=as.factor(Wave))) + 
+  geom_histogram(alpha=.6, bins = 150) + 
+  facet_grid(rows = vars(YearF)) +
+  ggtitle ("Number of observations per day number for the three years") +
+  xlab("Day number of the year") +  ylab ("Number of observations") +
+  labs(fill = "Wave") +
+  theme(plot.title = element_text(hjust = 0.5))
+```
+
+### Weather conditions
+
+Next, let's see what the weather was like on those days. For that we first will take only the unique dates and there corresponding weather conditions. 
+
+```{r, fig.align='center', echo=TRUE}
+FB %>%
+  distinct(LDate, Wave, YearF, YDay, Temp_mean, Hours_sun, Prec_hours, Humid) %>%
+  ggplot() +
+  geom_col(aes(x = YDay, y = Prec_hours), fill = "darkblue", alpha = .6) +
+  geom_point(aes(x = YDay, y = Hours_sun), color = "darkgoldenrod1", alpha = .6) +
+  geom_smooth(aes (x = YDay, y = Temp_mean, colour = as.factor(Wave)), alpha = .6, span = 1, method = 'lm', se = FALSE) +
+  facet_grid(rows = vars(YearF)) +
+  ggtitle ("Weather conditions per day number per year") +
+  xlab("Day of the year") +  ylab ("") +
+  labs(colour = "Wave") +
+  theme(plot.title = element_text(hjust = 0.5))
+
+```
+
+The blue bars represent the hours of precipitation (a fancy word for rain). The yellow dots represent the sun, at least the number of hours that you could see the sun shine. The colored lines are the regression lines of the mean temperature per wave. We are now in March (around day number 70), so it is nice to see that the average temperature will go up in the end.
+
+### Physical Activity
+
+Now let's add the physical activity data. More specifically, lets add the average number of steps per day. In order to do this, we need to calculate the mean and standard deviations of steps per day. In addition, I divided the number of steps by 1000 so it is number of K steps per day. To keep the graphic a clear, I have excluded the average temperature and created a smooth line of the mean physical activity.
+
+```{r, fig.align='center', echo=TRUE}
+
+FB %>%
+  filter(Imputed == "observed") %>% # only use the observed data
+  group_by(Wave, YearF, YDay, Hours_sun, Prec_hours) %>%
+  summarize(StepsK_mean = mean(Steps)/1000,
+            StepsK_sd = sd(Steps)/1000) %>%
+  ungroup() %>%
+    ggplot() +
+  geom_col(aes(x = YDay, y = Prec_hours), fill = "darkblue", alpha = .6) +
+  geom_point(aes(x = YDay, y = Hours_sun), color = "darkgoldenrod1", alpha = .6) +
+  geom_smooth(aes (x = YDay, y = StepsK_mean, colour = as.factor(Wave)), alpha = .6, span = 1, method = 'loess', se = FALSE) +
+  facet_grid(rows = vars(YearF)) +
+  ggtitle ("Physical activity and weather conditions over the three year") +
+  xlab("Day of the year") +  ylab ("") +
+  labs(colour = "Wave") +
+  theme(plot.title = element_text(hjust = 0.5))
+
+```
+
+As you can observe, the weather (at least hours of sun and rain) seem to predict psychical activity in Wave 3 and perhaps also in wave 4. Fortunately we have the data and we can test whether the weather has an effect on adolescents physical activity. 
+
+Because we have multiple measures per participant and the participants are nested in classrooms, we will use a mixed effects model to control for the clustering of the data. But first, we want to make sure that the data is normally distributed. Therefore we use the Shapiro-Wilk’s test and print out the histogram of the mean minutes of MVPA. The null hypothesis of the Shapiro-Wilk’s test is that the data is normally distributed. As you can see, the plot looks sort of normally distributed, but this is not the case according to a significant Shapiro-Wilk’s test.
+
+```{r, fig.align='center', echo=TRUE}
+FB2<-FB %>%
+  filter(Imputed == "observed" & Steps >999) %>%
+  group_by(Child) %>%
+  summarize(StepsK_mean = mean(Steps)/1000) %>%
+  ungroup()
+
+hist(FB2$StepsK_mean)
+
+shapiro.test(FB2$StepsK_mean)
+```
+
+### Mixed effects model with lme4
+
+We should fix that, but we are not going to do this now. For now I will focus on the mixed effects model.
+
+```{r, echo=FALSE}
+library(lme4)
+library(lmerTest)
+options(scipen = 5)
+
+model_weather<-lmer(Steps ~ 
+                      Temp_mean +             # the mean temperature of that day
+                      Hours_sun +             # how many hours of sunshine
+                      Prec_hours +            # how many hours of rain
+                      Humid +                 # the humidity
+                      as.factor(Sex) + Age +  # controlled for sex and age
+                      (1|School) +            # the kids are clustered in schools
+                      (1|Class) +             # and within schools, they are clustered in classrooms
+                      (1|Child) +             # some kids are more than others
+                      (1|Day),                # some days are more active days than others
+                    data=FB)
+
+summary(model_weather)
+```
+
+If we look at the summary output we see under the Random Effects that the residual variance on the different levels are: 5403200; 135956; 233531; 920732.
+This means that the conditional explained variance of these four levels is:
+
+```{r, echo=TRUE}
+(5403200+135956+233531+920732)/(5403200+135956+233531+920732+22881407)
+```
+
+And when we look at the fixed effects, we see that there is a negative effect of sex (girls are less active than boys) and age (the older the participants are, the less active they are). If you only want to print out the fixed effects, you can use: 
+
+```{r, echo=FALSE}
+summary(model_weather)$coefficients
+```
+
+Moreover, we see positive effects of the temperature, the hours of sunshine and the humidity. Also a negative effect of the hours of rain per day. Let's make four graphs based on these results. 
+
+### Visualize the separate effects.
+
+First up, the effect of the mean temperature. The alpha of the points in the graph is set to the number of observations that is used to calculate the average score. So the higher the alpha (the more visible the dot), the more data is used. I have added a grey geom_smooth with a grey line and a red line. The red line is the regression coefficient the grey follows the data. This indicates that this effect is not a perfect linear function and seems to weaken after 20 degrees. Which makes sense, because then it will become too hot to be physically active. Second, I have made a similar plot for the effect of the hours of sunshine, that provides a similar pattern.
+
+```{r, fig.align='center', echo=FALSE}
+FB%>%
+  filter(Imputed == "observed" & Steps >999) %>%
+  group_by(Temp_mean) %>%
+  summarize(StepsK_mean = mean(Steps)/1000,
+            StepsK_sd = sd(Steps)/1000,
+            N = n()) %>%
+  ungroup() %>%
+  ggplot() +
+  geom_point(aes(x = Temp_mean , y = StepsK_mean, , alpha = sqrt(N/(max(N)))), color = "aquamarine3")+
+  geom_smooth(aes(x = Temp_mean, y = StepsK_mean), colour = "tomato1", alpha = .6, span = 1, method = 'loess', se = FALSE) +
+  geom_smooth(aes(x = Temp_mean, y = StepsK_mean), colour = "brown1", alpha = .6, span = 1, method = 'lm', se = summary(model_weather)$coefficients[2,2])+
+  ggtitle ("The effect of the mean temperature on physical activity") +
+  xlab("Mean temperature in Celsius") +  ylab ("1000 Steps") +
+  theme(legend.position = "none", plot.title = element_text(hjust = 0.5))
+```
+
+```{r, fig.align='center', echo=FALSE}
+FB%>%
+  filter(Imputed == "observed" & Steps >999) %>%
+  group_by(Hours_sun) %>%
+  summarize(StepsK_mean = mean(Steps)/1000,
+            StepsK_sd = sd(Steps)/1000,
+            N = n()) %>%
+  ungroup() %>%
+  ggplot() +
+  geom_point(aes(x = Hours_sun , y = StepsK_mean, , alpha = sqrt(N/(max(N)))), color = "orange")+
+  geom_smooth(aes(x = Hours_sun, y = StepsK_mean), colour = "tomato1", alpha = .6, span = 1, method = 'loess', se = FALSE) +
+  geom_smooth(aes(x = Hours_sun, y = StepsK_mean), colour = "brown1", alpha = .6, span = 1, method = 'lm', se = summary(model_weather)$coefficients[3,2])+
+  ggtitle ("The effect of the hours of sun on physical activity") +
+  xlab("Hours of sunshine per day") +  ylab ("1000 Steps") +
+  theme(legend.position = "none", plot.title = element_text(hjust = 0.5))
+```
+
+Here we observe the same pattern. This does make sense as I can image than these two variables are correlated. However, when we check in the lme4 output, we see that there was a negative correlation between those two (when controlled for the other variables). Let's investigate this.
+
+Are the two variables normally distributed?
+
+```{r, fig.align='center', echo=TRUE}
+FB3<-FB %>%
+  distinct(LDate, Temp_mean, Hours_sun)
+
+hist(FB3$Temp_mean)
+shapiro.test(FB3$Temp_mean)
+
+hist(FB3$Hours_sun)
+shapiro.test(FB3$Hours_sun)
+```
+
+Nope! So let's use a rank-based correlation:
+
+```{r, fig.align='center', echo=TRUE}
+
+cor.test(FB3$Temp_mean, 
+         FB3$Hours_sun,
+         method = "spearman")
+
+ggplot(data = FB3) +
+  geom_point(aes(x = Hours_sun, y = Temp_mean), color= "orange",  alpha = .4) +
+  geom_smooth(aes(x = Hours_sun, y = Temp_mean), color= "red", alpha = .6, span = 1, method = 'lm', se = TRUE)
+
+```
+
+
+And what is the effect of the humidity on physical activity?
+
+```{r, fig.align='center', echo=FALSE}
+FB%>%
+  filter(Imputed == "observed" & Steps >999) %>%
+  group_by(Humid) %>%
+  summarize(StepsK_mean = mean(Steps)/1000,
+            StepsK_sd = sd(Steps)/1000,
+            N = n()) %>%
+  ungroup() %>%
+  ggplot() +
+  geom_point(aes(x = Humid , y = StepsK_mean, , alpha = sqrt(N/(max(N)))), color = "orchid3")+
+  geom_smooth(aes(x = Humid, y = StepsK_mean), colour = "tomato1", alpha = .6, span = 1, method = 'loess', se = FALSE) +
+  geom_smooth(aes(x = Humid, y = StepsK_mean), colour = "brown1", alpha = .6, span = 1, method = 'lm', se = summary(model_weather)$coefficients[4,2])+
+  ggtitle ("The effect of the humidity on physical activity") +
+  xlab("Humidity") +  ylab ("1000 Steps") +
+  theme(legend.position = "none", plot.title = element_text(hjust = 0.5))
+```
+
+In this plot you can observe that the relationship is probably not linear. Both very low and very high humid days predict less physical activity. The regression line is almost flat. 
+
+And the last plot, the plot that I anticipated, the effect of the rain on physical activity:
+
+```{r, fig.align='center', echo=FALSE}
+FB%>%
+  filter(Imputed == "observed" & Steps >999) %>%
+  group_by(Prec_hours) %>%
+  summarize(StepsK_mean = mean(Steps)/1000,
+            StepsK_sd = sd(Steps)/1000,
+            N = n()) %>%
+  ungroup() %>%
+  ggplot() +
+  geom_point(aes(x = Prec_hours , y = StepsK_mean, , alpha = sqrt(N/(max(N)))), color = "deepskyblue")+
+  geom_smooth(aes(x = Prec_hours, y = StepsK_mean), colour = "tomato1", alpha = .6, span = 1, method = 'loess', se = FALSE) +
+  geom_smooth(aes(x = Prec_hours, y = StepsK_mean), colour = "brown1", alpha = .6, span = 1, method = 'lm', se = summary(model_weather)$coefficients[3,2])+
+  ggtitle ("The effect of the hours of rain on physical activity") +
+  xlab("Hours of precipitation per day") +  ylab ("1000 Steps") +
+  theme(legend.position = "none", plot.title = element_text(hjust = 0.5))
+```
+
+So there you have it. The more it rains, the less physically active the kids in the MyMovez sample are. And does this means that i have a good excuse the skip practice for tonight?
+
+Later!
+
+<p align= "center">
+  <img src="https://media.giphy.com/media/FC4z4naxujHK8/giphy.gif" width="400" height="200">
+</p>
+
+

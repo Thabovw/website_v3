@@ -1,0 +1,309 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Children | Thabo J. van Woudenberg</title>
+    <link>https://www.tvanwoudenberg.com/tag/children/</link>
+      <atom:link href="https://www.tvanwoudenberg.com/tag/children/index.xml" rel="self" type="application/rss+xml" />
+    <description>Children</description>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><copyright>Thabo J. van Woudenberg © 2020</copyright><lastBuildDate>Thu, 05 Mar 2020 00:00:00 +0000</lastBuildDate>
+    <image>
+      <url>https://www.tvanwoudenberg.com/images/icon_hu0b7a4cb9992c9ac0e91bd28ffd38dd00_9727_512x512_fill_lanczos_center_2.png</url>
+      <title>Children</title>
+      <link>https://www.tvanwoudenberg.com/tag/children/</link>
+    </image>
+    
+    <item>
+      <title>The effect of the weather on adolescents&#39; physical activity.</title>
+      <link>https://www.tvanwoudenberg.com/post/weather-on-pa/</link>
+      <pubDate>Thu, 05 Mar 2020 00:00:00 +0000</pubDate>
+      <guid>https://www.tvanwoudenberg.com/post/weather-on-pa/</guid>
+      <description>
+
+
+&lt;p&gt;Hi all!&lt;/p&gt;
+&lt;p&gt;While I’m a writing this blog, I’m sitting in the train. Soaked… again. It has been raining for quite some weeks now and the weather report doesn’t give me much hope for the next weeks. I certainly don’t want to go outside to train for the half-marathon. To make myself a little less depressed, I think it is time for a new blog.&lt;/p&gt;
+&lt;p&gt;In this blog, I wanted to see whether I am the only one, or whether the kids in the &lt;a href=&#34;https://bmcpublichealth.biomedcentral.com/articles/10.1186/s12889-018-5353-5#Sec4&#34; target=&#34;_blank&#34;&gt;MyMovez project&lt;/a&gt; sample also are less physically active on rainy days.&lt;/p&gt;
+&lt;p align=&#34;center&#34;&gt;
+&lt;img src=&#34;https://media.giphy.com/media/129BtnUUD6Lrzi/giphy.gif&#34; width=&#34;400&#34; height=&#34;200&#34;&gt;
+&lt;/p&gt;
+&lt;p&gt;But before we start, first let is get in the mood by playing the sound on &lt;a href=&#34;https://rainymood.com/&#34; target=&#34;_blank&#34;&gt;this website&lt;/a&gt;.&lt;/p&gt;
+&lt;div id=&#34;the-data&#34; class=&#34;section level3&#34;&gt;
+&lt;h3&gt;The data&lt;/h3&gt;
+&lt;p&gt;The data of the project is publicly available, &lt;a href=&#34;https://easy.dans.knaw.nl/ui/datasets/id/easy-dataset:155345&#34; target=&#34;_blank&#34;&gt;clickettyclickclick&lt;/a&gt;. In addition, the KNMI (Royal Netherlands Meteorological Institute) shares the day-to-day weather data on &lt;a href=&#34;http://projects.knmi.nl/klimatologie/daggegevens/selectie.cgi&#34; target=&#34;_blank&#34;&gt;their website&lt;/a&gt;. For a conference poster, I downloaded the data from 27-01-2016 until 04-07-2018. This data is already merged to the physical activity data, so you don’t have to do this yourself.&lt;/p&gt;
+&lt;p&gt;The first step is to load the downloaded MyMovez data. More specifically, we unzip the file and only need the physical activity data that is stored in the folder “5. Fitbit data”.
+Let’s see what type of data we have here…&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;## -- Attaching packages ------------------------------------------------------------------------------------------------------------------------------------------------- tidyverse 1.2.1 --
+## v ggplot2 3.2.0     v purrr   0.3.2
+## v tibble  2.1.3     v dplyr   0.8.3
+## v tidyr   1.0.0     v stringr 1.4.0
+## v readr   1.3.1     v forcats 0.4.0
+## Warning: package &amp;#39;tidyr&amp;#39; was built under R version 3.6.2
+## -- Conflicts ---------------------------------------------------------------------------------------------------------------------------------------------------- tidyverse_conflicts() --
+## x dplyr::filter() masks stats::filter()
+## x dplyr::lag()    masks stats::lag()
+##   number_of_dates
+## 1             224
+##         Date
+## 1 2016-01-29
+## 2 2016-01-28
+## 3 2016-01-30
+## 4 2016-04-02
+## 5 2016-04-01
+## 6 2016-03-31
+##           Date
+## 219 2018-04-16
+## 220 2018-05-23
+## 221 2018-03-21
+## 222  20-5-2018
+## 223  19-5-2018
+## 224  18-5-2018&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Apparently, there is something wrong with three dates: 18-5-2018 until 20-5-2018 are stored in a different format. Let’s re-code them&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;FB&amp;lt;-FB %&amp;gt;%
+  mutate(Date=recode(Date, 
+                     &amp;#39;18-5-2018&amp;#39; = &amp;quot;2018-05-18&amp;quot;,
+                     &amp;#39;19-5-2018&amp;#39; = &amp;quot;2018-05-19&amp;quot;,
+                     &amp;#39;20-5-2018&amp;#39; = &amp;quot;2018-05-20&amp;quot;))
+
+FB%&amp;gt;%
+  distinct(Date) %&amp;gt;%
+  summarize(number_of_dates = n()) # 221 dates
+##   number_of_dates
+## 1             221&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;The factor ‘Date’ is correct now, so we can make it a date variable. For this we will use the lubridate package.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;library(lubridate)
+## 
+## Attaching package: &amp;#39;lubridate&amp;#39;
+## The following object is masked from &amp;#39;package:base&amp;#39;:
+## 
+##     date
+
+FB &amp;lt;- FB %&amp;gt;%
+  mutate(LDate = lubridate::date(Date))
+
+FB %&amp;gt;% 
+  select(LDate) %&amp;gt;%
+  summarize(begin = min(LDate),
+            end = max(LDate))
+##        begin        end
+## 1 2016-01-27 2018-07-04&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Indeed the first day of data is 27th of January 2016 and the last date is the 4th of July in 2018.&lt;/p&gt;
+&lt;p align=&#34;center&#34;&gt;
+&lt;img src=&#34;https://media.giphy.com/media/1lk1IcVgqPLkA/giphy.gif&#34; width=&#34;400&#34; height=&#34;200&#34;&gt;
+&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;manipulating-the-data&#34; class=&#34;section level3&#34;&gt;
+&lt;h3&gt;Manipulating the data&lt;/h3&gt;
+&lt;p&gt;In this blog, I want to make two new variables. One that informs us what year it is, the other the day number in that year. For example, 4th of July in 2018 is in the year 2018 (duh) and the 4th of July is the …&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;lubridate::yday(&amp;quot;2018-07-04&amp;quot;)
+## [1] 185&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;… 185th day of the year of course. I knew that. this function is not on the &lt;a href=&#34;https://evoldyn.gitlab.io/evomics-2018/ref-sheets/R_lubridate.pdf&#34; target=&#34;_blank&#34;&gt;cheatsheet&lt;/a&gt;, but believe me, it works.&lt;/p&gt;
+&lt;p&gt;We can use the same function for all the dates:&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;FB &amp;lt;- FB %&amp;gt;%
+  mutate(Year = lubridate::year(LDate),      # this is the year
+         YDay = lubridate::yday(LDate)) %&amp;gt;%  # this is the number of day in that year
+  mutate(YearF = as.factor(Year))            # make the year a factor&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Let’s see how many data-points per day we have.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;library(ggplot2)
+
+ggplot(data = FB, aes(x = YDay, fill=as.factor(Wave))) + 
+  geom_histogram(alpha=.6, bins = 150) + 
+  facet_grid(rows = vars(YearF)) +
+  ggtitle (&amp;quot;Number of observations per day number for the three years&amp;quot;) +
+  xlab(&amp;quot;Day number of the year&amp;quot;) +  ylab (&amp;quot;Number of observations&amp;quot;) +
+  labs(fill = &amp;quot;Wave&amp;quot;) +
+  theme(plot.title = element_text(hjust = 0.5))&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;https://www.tvanwoudenberg.com/post/effect-of-weather-on-PA_files/figure-html/unnamed-chunk-6-1.png&#34; width=&#34;672&#34; style=&#34;display: block; margin: auto;&#34; /&gt;&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;weather-conditions&#34; class=&#34;section level3&#34;&gt;
+&lt;h3&gt;Weather conditions&lt;/h3&gt;
+&lt;p&gt;Next, let’s see what the weather was like on those days. For that we first will take only the unique dates and there corresponding weather conditions.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;FB %&amp;gt;%
+  distinct(LDate, Wave, YearF, YDay, Temp_mean, Hours_sun, Prec_hours, Humid) %&amp;gt;%
+  ggplot() +
+  geom_col(aes(x = YDay, y = Prec_hours), fill = &amp;quot;darkblue&amp;quot;, alpha = .6) +
+  geom_point(aes(x = YDay, y = Hours_sun), color = &amp;quot;darkgoldenrod1&amp;quot;, alpha = .6) +
+  geom_smooth(aes (x = YDay, y = Temp_mean, colour = as.factor(Wave)), alpha = .6, span = 1, method = &amp;#39;lm&amp;#39;, se = FALSE) +
+  facet_grid(rows = vars(YearF)) +
+  ggtitle (&amp;quot;Weather conditions per day number per year&amp;quot;) +
+  xlab(&amp;quot;Day of the year&amp;quot;) +  ylab (&amp;quot;&amp;quot;) +
+  labs(colour = &amp;quot;Wave&amp;quot;) +
+  theme(plot.title = element_text(hjust = 0.5))&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;https://www.tvanwoudenberg.com/post/effect-of-weather-on-PA_files/figure-html/unnamed-chunk-7-1.png&#34; width=&#34;672&#34; style=&#34;display: block; margin: auto;&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;The blue bars represent the hours of precipitation (a fancy word for rain). The yellow dots represent the sun, at least the number of hours that you could see the sun shine. The colored lines are the regression lines of the mean temperature per wave. We are now in March (around day number 70), so it is nice to see that the average temperature will go up in the end.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;physical-activity&#34; class=&#34;section level3&#34;&gt;
+&lt;h3&gt;Physical Activity&lt;/h3&gt;
+&lt;p&gt;Now let’s add the physical activity data. More specifically, lets add the average number of steps per day. In order to do this, we need to calculate the mean and standard deviations of steps per day. In addition, I divided the number of steps by 1000 so it is number of K steps per day. To keep the graphic a clear, I have excluded the average temperature and created a smooth line of the mean physical activity.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;
+FB %&amp;gt;%
+  filter(Imputed == &amp;quot;observed&amp;quot;) %&amp;gt;% # only use the observed data
+  group_by(Wave, YearF, YDay, Hours_sun, Prec_hours) %&amp;gt;%
+  summarize(StepsK_mean = mean(Steps)/1000,
+            StepsK_sd = sd(Steps)/1000) %&amp;gt;%
+  ungroup() %&amp;gt;%
+    ggplot() +
+  geom_col(aes(x = YDay, y = Prec_hours), fill = &amp;quot;darkblue&amp;quot;, alpha = .6) +
+  geom_point(aes(x = YDay, y = Hours_sun), color = &amp;quot;darkgoldenrod1&amp;quot;, alpha = .6) +
+  geom_smooth(aes (x = YDay, y = StepsK_mean, colour = as.factor(Wave)), alpha = .6, span = 1, method = &amp;#39;loess&amp;#39;, se = FALSE) +
+  facet_grid(rows = vars(YearF)) +
+  ggtitle (&amp;quot;Physical activity and weather conditions over the three year&amp;quot;) +
+  xlab(&amp;quot;Day of the year&amp;quot;) +  ylab (&amp;quot;&amp;quot;) +
+  labs(colour = &amp;quot;Wave&amp;quot;) +
+  theme(plot.title = element_text(hjust = 0.5))&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;https://www.tvanwoudenberg.com/post/effect-of-weather-on-PA_files/figure-html/unnamed-chunk-8-1.png&#34; width=&#34;672&#34; style=&#34;display: block; margin: auto;&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;As you can observe, the weather (at least hours of sun and rain) seem to predict psychical activity in Wave 3 and perhaps also in wave 4. Fortunately we have the data and we can test whether the weather has an effect on adolescents physical activity.&lt;/p&gt;
+&lt;p&gt;Because we have multiple measures per participant and the participants are nested in classrooms, we will use a mixed effects model to control for the clustering of the data. But first, we want to make sure that the data is normally distributed. Therefore we use the Shapiro-Wilk’s test and print out the histogram of the mean minutes of MVPA. The null hypothesis of the Shapiro-Wilk’s test is that the data is normally distributed. As you can see, the plot looks sort of normally distributed, but this is not the case according to a significant Shapiro-Wilk’s test.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;FB2&amp;lt;-FB %&amp;gt;%
+  filter(Imputed == &amp;quot;observed&amp;quot; &amp;amp; Steps &amp;gt;999) %&amp;gt;%
+  group_by(Child) %&amp;gt;%
+  summarize(StepsK_mean = mean(Steps)/1000) %&amp;gt;%
+  ungroup()
+
+hist(FB2$StepsK_mean)&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;https://www.tvanwoudenberg.com/post/effect-of-weather-on-PA_files/figure-html/unnamed-chunk-9-1.png&#34; width=&#34;672&#34; style=&#34;display: block; margin: auto;&#34; /&gt;&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;
+shapiro.test(FB2$StepsK_mean)
+## 
+##  Shapiro-Wilk normality test
+## 
+## data:  FB2$StepsK_mean
+## W = 0.97592, p-value = 1.2e-14&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;div id=&#34;mixed-effects-model-with-lme4&#34; class=&#34;section level3&#34;&gt;
+&lt;h3&gt;Mixed effects model with lme4&lt;/h3&gt;
+&lt;p&gt;We should fix that, but we are not going to do this now. For now I will focus on the mixed effects model.&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;## Loading required package: Matrix
+## 
+## Attaching package: &amp;#39;Matrix&amp;#39;
+## The following objects are masked from &amp;#39;package:tidyr&amp;#39;:
+## 
+##     expand, pack, unpack
+## 
+## Attaching package: &amp;#39;lmerTest&amp;#39;
+## The following object is masked from &amp;#39;package:lme4&amp;#39;:
+## 
+##     lmer
+## The following object is masked from &amp;#39;package:stats&amp;#39;:
+## 
+##     step
+## Linear mixed model fit by REML. t-tests use Satterthwaite&amp;#39;s method [
+## lmerModLmerTest]
+## Formula: 
+## Steps ~ Temp_mean + Hours_sun + Prec_hours + Humid + as.factor(Sex) +  
+##     Age + (1 | School) + (1 | Class) + (1 | Child) + (1 | Day)
+##    Data: FB
+## 
+## REML criterion at convergence: 522636.8
+## 
+## Scaled residuals: 
+##     Min      1Q  Median      3Q     Max 
+## -3.5764 -0.6527 -0.0689  0.5600  7.1169 
+## 
+## Random effects:
+##  Groups   Name        Variance Std.Dev.
+##  Child    (Intercept)  5404700 2324.8  
+##  Class    (Intercept)   135685  368.4  
+##  School   (Intercept)   233903  483.6  
+##  Day      (Intercept)   917769  958.0  
+##  Residual             22881153 4783.4  
+## Number of obs: 26297, groups:  Child, 1481; Class, 132; School, 28; Day, 7
+## 
+## Fixed effects:
+##                  Estimate Std. Error        df t value Pr(&amp;gt;|t|)    
+## (Intercept)     14643.146    732.255    51.359  19.997  &amp;lt; 2e-16 ***
+## Temp_mean          58.812      5.335 24206.740  11.025  &amp;lt; 2e-16 ***
+## Hours_sun          60.850     10.804 24599.970   5.632 1.80e-08 ***
+## Prec_hours       -125.907     12.576 22055.426 -10.012  &amp;lt; 2e-16 ***
+## Humid              12.300      4.150 24063.573   2.964  0.00304 ** 
+## as.factor(Sex)1 -1101.764    138.300  1446.305  -7.966 3.28e-15 ***
+## Age              -569.221     40.206  1281.668 -14.158  &amp;lt; 2e-16 ***
+## ---
+## Signif. codes:  0 &amp;#39;***&amp;#39; 0.001 &amp;#39;**&amp;#39; 0.01 &amp;#39;*&amp;#39; 0.05 &amp;#39;.&amp;#39; 0.1 &amp;#39; &amp;#39; 1
+## 
+## Correlation of Fixed Effects:
+##             (Intr) Tmp_mn Hrs_sn Prc_hr Humid  a.(S)1
+## Temp_mean   -0.039                                   
+## Hours_sun   -0.330 -0.230                            
+## Prec_hours  -0.069  0.003  0.242                     
+## Humid       -0.506 -0.037  0.587 -0.166              
+## as.fctr(S)1 -0.111  0.000  0.003  0.004  0.003       
+## Age         -0.659 -0.009 -0.005  0.146  0.046  0.008&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;If we look at the summary output we see under the Random Effects that the residual variance on the different levels are: 5403200; 135956; 233531; 920732.
+This means that the conditional explained variance of these four levels is:&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;(5403200+135956+233531+920732)/(5403200+135956+233531+920732+22881407)
+## [1] 0.2263215&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;And when we look at the fixed effects, we see that there is a negative effect of sex (girls are less active than boys) and age (the older the participants are, the less active they are). If you only want to print out the fixed effects, you can use:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;##                    Estimate Std. Error          df    t value     Pr(&amp;gt;|t|)
+## (Intercept)     14643.14574 732.254601    51.35903  19.997342 6.812609e-26
+## Temp_mean          58.81247   5.334634 24206.73977  11.024651 3.392223e-28
+## Hours_sun          60.85028  10.803518 24599.97027   5.632451 1.796056e-08
+## Prec_hours       -125.90697  12.576115 22055.42573 -10.011595 1.521894e-23
+## Humid              12.30023   4.150462 24063.57293   2.963580 3.043802e-03
+## as.factor(Sex)1 -1101.76444 138.299835  1446.30516  -7.966491 3.280158e-15
+## Age              -569.22068  40.205623  1281.66756 -14.157738 2.190786e-42&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Moreover, we see positive effects of the temperature, the hours of sunshine and the humidity. Also a negative effect of the hours of rain per day. Let’s make four graphs based on these results.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;visualize-the-separate-effects.&#34; class=&#34;section level3&#34;&gt;
+&lt;h3&gt;Visualize the separate effects.&lt;/h3&gt;
+&lt;p&gt;First up, the effect of the mean temperature. The alpha of the points in the graph is set to the number of observations that is used to calculate the average score. So the higher the alpha (the more visible the dot), the more data is used. I have added a grey geom_smooth with a grey line and a red line. The red line is the regression coefficient the grey follows the data. This indicates that this effect is not a perfect linear function and seems to weaken after 20 degrees. Which makes sense, because then it will become too hot to be physically active. Second, I have made a similar plot for the effect of the hours of sunshine, that provides a similar pattern.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://www.tvanwoudenberg.com/post/effect-of-weather-on-PA_files/figure-html/unnamed-chunk-13-1.png&#34; width=&#34;672&#34; style=&#34;display: block; margin: auto;&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://www.tvanwoudenberg.com/post/effect-of-weather-on-PA_files/figure-html/unnamed-chunk-14-1.png&#34; width=&#34;672&#34; style=&#34;display: block; margin: auto;&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;Here we observe the same pattern. This does make sense as I can image than these two variables are correlated. However, when we check in the lme4 output, we see that there was a negative correlation between those two (when controlled for the other variables). Let’s investigate this.&lt;/p&gt;
+&lt;p&gt;Are the two variables normally distributed?&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;FB3&amp;lt;-FB %&amp;gt;%
+  distinct(LDate, Temp_mean, Hours_sun)
+
+hist(FB3$Temp_mean)&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;https://www.tvanwoudenberg.com/post/effect-of-weather-on-PA_files/figure-html/unnamed-chunk-15-1.png&#34; width=&#34;672&#34; style=&#34;display: block; margin: auto;&#34; /&gt;&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;shapiro.test(FB3$Temp_mean)
+## 
+##  Shapiro-Wilk normality test
+## 
+## data:  FB3$Temp_mean
+## W = 0.97645, p-value = 0.0009455
+
+hist(FB3$Hours_sun)&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;https://www.tvanwoudenberg.com/post/effect-of-weather-on-PA_files/figure-html/unnamed-chunk-15-2.png&#34; width=&#34;672&#34; style=&#34;display: block; margin: auto;&#34; /&gt;&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;shapiro.test(FB3$Hours_sun)
+## 
+##  Shapiro-Wilk normality test
+## 
+## data:  FB3$Hours_sun
+## W = 0.94282, p-value = 0.0000001244&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Nope! So let’s use a rank-based correlation:&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;
+cor.test(FB3$Temp_mean, 
+         FB3$Hours_sun,
+         method = &amp;quot;spearman&amp;quot;)
+## Warning in cor.test.default(FB3$Temp_mean, FB3$Hours_sun, method =
+## &amp;quot;spearman&amp;quot;): Cannot compute exact p-value with ties
+## 
+##  Spearman&amp;#39;s rank correlation rho
+## 
+## data:  FB3$Temp_mean and FB3$Hours_sun
+## S = 1394893, p-value = 0.0007707
+## alternative hypothesis: true rho is not equal to 0
+## sample estimates:
+##       rho 
+## 0.2246031
+
+ggplot(data = FB3) +
+  geom_point(aes(x = Hours_sun, y = Temp_mean), color= &amp;quot;orange&amp;quot;,  alpha = .4) +
+  geom_smooth(aes(x = Hours_sun, y = Temp_mean), color= &amp;quot;red&amp;quot;, alpha = .6, span = 1, method = &amp;#39;lm&amp;#39;, se = TRUE)&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;https://www.tvanwoudenberg.com/post/effect-of-weather-on-PA_files/figure-html/unnamed-chunk-16-1.png&#34; width=&#34;672&#34; style=&#34;display: block; margin: auto;&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;And what is the effect of the humidity on physical activity?&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://www.tvanwoudenberg.com/post/effect-of-weather-on-PA_files/figure-html/unnamed-chunk-17-1.png&#34; width=&#34;672&#34; style=&#34;display: block; margin: auto;&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;In this plot you can observe that the relationship is probably not linear. Both very low and very high humid days predict less physical activity. The regression line is almost flat.&lt;/p&gt;
+&lt;p&gt;And the last plot, the plot that I anticipated, the effect of the rain on physical activity:&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://www.tvanwoudenberg.com/post/effect-of-weather-on-PA_files/figure-html/unnamed-chunk-18-1.png&#34; width=&#34;672&#34; style=&#34;display: block; margin: auto;&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;So there you have it. The more it rains, the less physically active the kids in the MyMovez sample are. And does this means that i have a good excuse the skip practice for tonight?&lt;/p&gt;
+&lt;p&gt;Later!&lt;/p&gt;
+&lt;p align=&#34;center&#34;&gt;
+&lt;img src=&#34;https://media.giphy.com/media/FC4z4naxujHK8/giphy.gif&#34; width=&#34;400&#34; height=&#34;200&#34;&gt;
+&lt;/p&gt;
+&lt;/div&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

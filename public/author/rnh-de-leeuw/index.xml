@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>RNH de Leeuw | Thabo J. van Woudenberg</title>
+    <link>https://www.tvanwoudenberg.com/author/rnh-de-leeuw/</link>
+      <atom:link href="https://www.tvanwoudenberg.com/author/rnh-de-leeuw/index.xml" rel="self" type="application/rss+xml" />
+    <description>RNH de Leeuw</description>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><copyright>Thabo J. van Woudenberg © 2020</copyright><lastBuildDate>Thu, 18 Oct 2018 00:00:00 +0000</lastBuildDate>
+    <image>
+      <url>https://www.tvanwoudenberg.com/images/icon_hu0b7a4cb9992c9ac0e91bd28ffd38dd00_9727_512x512_fill_lanczos_center_2.png</url>
+      <title>RNH de Leeuw</title>
+      <link>https://www.tvanwoudenberg.com/author/rnh-de-leeuw/</link>
+    </image>
+    
+    <item>
+      <title>An integrated model of fruit, vegetable, and water intake in young adolescents</title>
+      <link>https://www.tvanwoudenberg.com/publication/smit_2018_integrated_model/</link>
+      <pubDate>Thu, 18 Oct 2018 00:00:00 +0000</pubDate>
+      <guid>https://www.tvanwoudenberg.com/publication/smit_2018_integrated_model/</guid>
+      <description></description>
+    </item>
+    
+  </channel>
+</rss>
