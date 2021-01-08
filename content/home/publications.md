@@ -8,7 +8,7 @@ active = true  # Activate this widget? true/false
 weight = 30  # Order that this section will appear.
 
 title = "Publications"
-subtitle = "The five most recent first-authored publications"
+subtitle = "The five most recent publications"
 
 [content]
   # Page type to display. E.g. post, talk, or publication.
