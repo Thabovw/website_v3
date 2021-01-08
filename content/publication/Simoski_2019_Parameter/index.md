@@ -4,7 +4,7 @@ authors:
 - B Simoski
 - M Klein
 - E Fernandes de Mello Araujo
-- AT van Hlteren
+- AT van Halteren
 - TJ van Woudenberg
 - KE Bevelander
 - M Buijzen
