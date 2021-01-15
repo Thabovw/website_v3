@@ -28,6 +28,6 @@ summary: A presentation on the experiences with youth making vlogs for the socia
 tags: [MyMovez]
 url_code: ""
 url_pdf: ""
-url_slides: "https://www.tvanwoudenberg.com/files/Aruba_vanWoudenberg.pdf"
+url_slides: "https://www.tvanwoudenberg.com/files/presentations/Aruba_vanWoudenberg.pdf"
 url_video: ""
 ---

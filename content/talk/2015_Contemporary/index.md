@@ -25,7 +25,7 @@ tags: [MyMovez]
 title: MyMovez. Health campaign using wearables
 url_code: ""
 url_pdf: ""
-url_slides: "static/files/Contemporary-challenges-2015.pdf"
+url_slides: "https://www.tvanwoudenberg.com/files/presentations/Contemporary-challenges-2015.pdf"
 url_video: ""
 ---
 

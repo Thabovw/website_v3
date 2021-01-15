@@ -28,6 +28,6 @@ summary: A presentation on the data of the participants of this school
 tags: [MyMovez]
 url_code: ""
 url_pdf: ""
-url_slides: "http://mymovez.socsci.ru.nl/wp-content/uploads/2018/09/MyMovez-presentatie-ouderavond-Gymnasium.pdf"
+url_slides: "https://www.tvanwoudenberg.com/files/presentations/MyMovez-presentatie-ouderavond-Gymnasium.pdf"
 url_video: ""
 ---

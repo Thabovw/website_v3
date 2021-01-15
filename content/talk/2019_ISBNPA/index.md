@@ -28,6 +28,6 @@ summary: A presentation on all network related studies in my dissertation at the
 tags: [MyMovez]
 url_code: ""
 url_pdf: ""
-url_slides: "https://www.tvanwoudenberg.com/files/Sunbelt_SNI_vlogs.pdf"
+url_slides: "https://www.tvanwoudenberg.com/files/presentations/Sunbelt_SNI_vlogs.pdf"
 url_video: ""
 ---

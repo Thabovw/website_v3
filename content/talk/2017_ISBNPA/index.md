@@ -28,6 +28,6 @@ summary: A presentation on the Beacon network and physical activity.
 tags: [MyMovez]
 url_code: ""
 url_pdf: ""
-url_slides: "http://mymovez.socsci.ru.nl/wp-content/uploads/2017/08/ISBNPA-2017-Vancouver.pdf"
+url_slides: "https://www.tvanwoudenberg.com/files/presentations/ISBNPA-2017-Vancouver.pdf"
 url_video: ""
 ---

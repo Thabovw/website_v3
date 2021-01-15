@@ -28,6 +28,6 @@ summary: A presentation on the research plans at the annual PhD day of the facul
 tags: [MyMovez]
 url_code: ""
 url_pdf: ""
-url_slides: "http://mymovez.socsci.ru.nl/wp-content/uploads/2017/08/PhDday20015.pdf"
+url_slides: "https://www.tvanwoudenberg.com/files/presentations/PhDday20015.pdf"
 url_video: ""
 ---

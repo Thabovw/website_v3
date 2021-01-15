@@ -28,6 +28,6 @@ summary: A presentation on social network intervention that used vlogs
 tags: [MyMovez]
 url_code: ""
 url_pdf: ""
-url_slides: "https://www.tvanwoudenberg.com/files/ISPAH_2018_T_van_Woudenberg_PA_interventions_for_youths.pdf"
+url_slides: "https://www.tvanwoudenberg.com/files/presentations/ISPAH_2018_T_van_Woudenberg_PA_interventions_for_youths.pdf"
 url_video: ""
 ---

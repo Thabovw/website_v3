@@ -28,6 +28,6 @@ summary: A presentation on my PhD project.
 tags: [MyMovez]
 url_code: ""
 url_pdf: ""
-url_slides: "http://mymovez.socsci.ru.nl/wp-content/uploads/2017/08/BSI_Day_2017.pdf"
+url_slides: "https://www.tvanwoudenberg.com/files/presentations/BSI_Day_2017.pdf"
 url_video: ""
 ---

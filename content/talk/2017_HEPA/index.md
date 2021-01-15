@@ -28,6 +28,6 @@ summary: A presentation on my the online social network intervention.
 tags: [MyMovez]
 url_code: ""
 url_pdf: ""
-url_slides: "http://mymovez.socsci.ru.nl/wp-content/uploads/2018/08/Hepa_T_van_Woudenberg_PA_interventions_in-_various_settings_43.pdf"
+url_slides: "https://www.tvanwoudenberg.com/files/presentations/Hepa_T_van_Woudenberg_PA_interventions_in-_various_settings_43.pdf"
 url_video: ""
 ---

@@ -28,6 +28,6 @@ summary: A presentation on the selection and influence study at the Etmaal 2020 
 tags: [MyMovez]
 url_code: ""
 url_pdf: ""
-url_slides: "https://www.tvanwoudenberg.com/files/Etmaal_2020.pdf"
+url_slides: "https://www.tvanwoudenberg.com/files/presentations/Etmaal_2020.pdf"
 url_video: ""
 ---

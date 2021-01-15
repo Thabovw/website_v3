@@ -24,6 +24,6 @@ tags: [MyMovez]
 title: Het gebruik van mobiele technologie ter bevordering van fysieke activiteit en gezondheid.
 url_code: ""
 url_pdf: ""
-url_slides: "http://mymovez.socsci.ru.nl/wp-content/uploads/2017/08/Gymmen-in-de-toekomst.pdf"
+url_slides: "https://www.tvanwoudenberg.com/files/presentations/Gymmen-in-de-toekomst.pdf"
 url_video: ""
 ---
