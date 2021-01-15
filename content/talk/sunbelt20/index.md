@@ -28,6 +28,6 @@ summary: A presentation on the selection and influence study at the sunbelt conf
 tags: [MyMovez]
 url_code: ""
 url_pdf: ""
-url_slides: "https://www.tvanwoudenberg.com/static/files/Sunbelt_2020_Select_Inf"
+url_slides: "https://www.tvanwoudenberg.com/files/presentations/Sunbelt_2020_Select_Inf.pdf"
 url_video: ""
 ---
