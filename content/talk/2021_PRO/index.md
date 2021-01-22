@@ -27,7 +27,7 @@ slides:
 summary: A presentation on the four studies in my dissertation.
 tags: [SocialMovez]
 url_code: ""
-url_pdf: "https://www.tvanwoudenberg.com/files/presentations/PRO_2021_presentatie.pdf"
-url_slides: ""
+url_pdf: ""
+url_slides: "https://www.tvanwoudenberg.com/files/presentations/PRO_2021_presentatie.pdf"
 url_video: ""
 ---
