@@ -3,7 +3,7 @@ title: Media & Ethiek. Social Networks and Health Interventions
 abstract: Guest lecture on social network (interventions) in health-related behaviors
 address:
   city: Virtual
-  country: Belgium
+  country: 
   postcode: 
   region: 
   street:
@@ -18,7 +18,7 @@ image:
   caption: 'Image credit: [**Unsplash**](https://unsplash.com/photos/ahi73ZN5P0Y)'
   focal_point: Right
 links:
-location: Rotterdam
+location: Belgium
 math: true
 projects:
 - SocialMovez-project
