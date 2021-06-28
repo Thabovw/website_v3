@@ -24,7 +24,7 @@ projects:
 - COVID
 publishDate: "2021-05-31T00:00:00Z"
 slides: 
-summary: his presentation is part of a panel discussion at the online ICA 2021
+summary: This presentation is part of a panel discussion at the online ICA 2021
 tags: [COVID]
 url_code: ""
 url_pdf: ""

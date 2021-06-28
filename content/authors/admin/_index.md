@@ -64,4 +64,4 @@ Dr. Thabo van Woudenberg is an academic researcher interested in social (network
 
 - Before this position, Thabo investigated the role of (offline) social networks in classrooms in promoting physical activity of adolescents and was part of the [MyMovez](http://www.mymovez.eu) research team. His work is combined in the [dissertation](https://www.tvanwoudenberg.com/files/Dissertation_T_van_Woudenberg.pdf), which he successfully defended in January 2020.
 
-{{< icon name="download" pack="fas" >}} Download my {{< staticref "files/CV TJ van Woudenberg 2020.pdf" "newtab" >}}CV{{< /staticref >}}.
+{{< icon name="download" pack="fas" >}} Download my {{< staticref "files/CV TJ van Woudenberg 2021.pdf" "newtab" >}}CV{{< /staticref >}}.
