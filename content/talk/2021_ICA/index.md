@@ -1,5 +1,5 @@
 ---
-title: Persuasive messaging to curb the COVID-19 pandemic and infodemic: questions and lessons from around the globe
+title: Persuasive messaging to curb the COVID-19 pandemic and infodemic; questions and lessons from around the globe
 abstract: This presentation is part of a panel discussion at the online ICA 2021
 address:
   city: Virtual
