@@ -37,7 +37,7 @@ featured: true
 # links:
 # - name: ""
 #   url: ""
-url_pdf: http://mymovez.socsci.ru.nl/wp-content/uploads/2018/08/SIMULTECH_2018_38_CR.pdf
+url_pdf: https://www.tvanwoudenberg.com/files/Araujo2018UsingSimulations.pdf
 url_code: ''
 url_dataset: ''
 url_poster: ''
