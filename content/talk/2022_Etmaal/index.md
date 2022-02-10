@@ -27,7 +27,7 @@ projects:
 publishDate: "2021-02-01T00:00:00Z"
 slides: 
 summary: A presentation on physical distancing behaviors in emerging adults.
-tags: [Covid19]
+tags: []
 url_code: ""
 url_pdf: "https://preprints.jmir.org/preprint/33713"
 url_slides: "https://www.tvanwoudenberg.com/files/presentations/Etmaal_2022.pdf"
