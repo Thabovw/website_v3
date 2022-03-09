@@ -27,17 +27,25 @@ date_format: Jan 2006
 item:
 - certificate_url: 
   date_end: ""
+  date_start: "2021-11-18"
+  description: ""
+  organization: Surf 
+  organization_url: https://www.surf.nl/en/news/nwo-grants-10-applications-for-computing-time-on-national-computer-facilities
+  title: Compute Call 2021
+  url: ""
+- certificate_url: 
+  date_end: ""
   date_start: "2020-11-01"
   description: ""
   organization: Research Data Netherlands
-  organization_url: https://researchdata.nl/en/services/data-prize
+  organization_url: https://researchdata.nl/en/services/de-nederlandse-dataprijs/
   title: The Dutch Data Incentive Prize
   url: ""
 - certificate_url: 
   date_end: ""
   date_start: "2019-06-01"
   description: ""
-  organization: Behavioral Science Institute, Radboud Univeristy
+  organization: Behavioral Science Institute, Radboud University
   organization_url:
   title: Data Champion Award 
   url: ""
@@ -45,7 +53,7 @@ item:
   date_end: ""
   date_start: "2018-06-01"
   description: ""
-  organization: Behavioral Science Institute, Radboud Univeristy
+  organization: Behavioral Science Institute, Radboud University
   organization_url:
   title: Best Paper Award (Second prize)
   url: ""
