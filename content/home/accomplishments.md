@@ -12,7 +12,7 @@ headless: true
 # Order that this section appears on the page.
 weight: 80
 
-title: Awards
+title: Awards & Grants
 subtitle:
 
 # Date format
