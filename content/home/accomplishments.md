@@ -35,6 +35,14 @@ item:
   url: ""
 - certificate_url: 
   date_end: ""
+  date_start: "2021-11-01"
+  description: ""
+  organization: Erasmus School of Social and Behavioral sciences 
+  organization_url: https://twitter.com/SuzannevdGroep/status/1471392189808795649
+  title: Dragon's Den Seed Grant 2021
+  url: ""
+- certificate_url: 
+  date_end: ""
   date_start: "2020-11-01"
   description: ""
   organization: Research Data Netherlands
