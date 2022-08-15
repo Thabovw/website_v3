@@ -12,7 +12,7 @@ _ R Hendrikx
 - Mattijs S Lambooij
 
 date: 2022-08-11T00:00:00
-doi: doi:10.2196/33713
+doi: http://doi.org/10.2196/33713
 
 
 # Schedule page publish date (NOT publication's date).
