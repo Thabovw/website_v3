@@ -13,12 +13,14 @@ education:
     year: 2012
 email: "vanwoudenberg@eur.nl"
 interests:
-- Physical Activity
-- Social Influence
 - Social Networks
-- Health Interventions
-- Mixed Methods
+- Social Influence
+- Environmental Behaviors
+- Health
 - Well-Being
+- Youth
+- Interventions/ RCTs
+- Mixed Methods
 organizations:
 - name: Erasmus University
   url: https://www.eur.nl/eng
@@ -58,10 +60,10 @@ user_groups:
 - Academic researcher
 ---
 
-Dr. Thabo van Woudenberg is an academic researcher interested in social (network) influences on health related behaviors and well-being. In his research, he uses social network modeling and mixed-effect models to study how physical activity and other health related behaviors spread within youth's social networks and how influential individuals can help peers in obtaining and preserving a healthy lifestyle.  
+Dr. Thabo van Woudenberg is an academic researcher interested in social (network) influences on positive behaviors in young people. For example, he is interested in how the behavior of peers shape behaviors related to health, well-being or environment. In his research, he uses social network modeling and mixed-effect models to study how behaviors spread within youth's social networks and how influential individuals can help peers in obtaining and preserving a positive lifestyle.  
 
 - Currently, Thabo is a post-doc research and coordinator of the NWO Vici financed [SocialMovez](https://www.eur.nl/en/essb/research/movez-lab/research-projects/socialmovez)-project at the Erasmus University in Rotterdam, the Netherlands. The SocialMovez-project investigates how health campaigns for young people can be spread more effectively through peer influencers in online social networks. Using innovative technologies in the field of data analysis, this research demonstrates that one can optimize online (health) campaigns without compromising the privacy of young people. More specifically, Thabo investigates in what way health related behaviors can spread online, and which individuals are important to target in online interventions.
 
-- Before this position, Thabo investigated the role of (offline) social networks in classrooms in promoting physical activity of adolescents and was part of the [MyMovez](http://www.mymovez.eu) research team. His work is combined in the [dissertation](https://www.tvanwoudenberg.com/files/Dissertation_T_van_Woudenberg.pdf), which he successfully defended in January 2020.
+- Before this position, Thabo investigated the role of (offline) social networks in classrooms in promoting physical activity of adolescents and was part of the [MyMovez](http://www.mymovez.eu) research team. His work is combined in the [dissertation](https://www.tvanwoudenberg.com/files/Dissertation_T_van_Woudenberg.pdf), which he defended successfully (with honors/cum laude) in January 2020.
 
 {{< icon name="download" pack="fas" >}} Download my {{< staticref "files/CV TJ van Woudenberg 2022.pdf" "newtab" >}}CV{{< /staticref >}}.
