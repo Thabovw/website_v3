@@ -1,9 +1,9 @@
 ---
-title: Physical Distancing and Social Media Use in Emerging Adults and Adults During the COVID-19 Pandemic; Large-scale Cross-sectional and Longitudinal Survey Study
+title: Physical Distancing and Social Media Use in Emerging Adults and Adults During the COVID-19 Pandemic. Large-scale Cross-sectional and Longitudinal Survey Study
 authors:
 - TJ van Woudenberg
 - M Buijzen
-_ R Hendrikx
+- R Hendrikx
 - JCM van Weert
 - B van den Putte
 - FM Kroese
