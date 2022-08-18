@@ -8,15 +8,15 @@ authors:
 - B van den Putte
 - FM Kroese
 - MPA Bouman
-- Marijn de Bruin
-- Mattijs S Lambooij
+- M de Bruin
+- MS Lambooij
 
 date: 2022-08-11T00:00:00
 doi: http://doi.org/10.2196/33713
 
 
 # Schedule page publish date (NOT publication's date).
-publishDate: "2022-08-15T16:29:00Z"
+publishDate: "2022-08-18T10:00:00Z"
 
 # Publication type.
 # Legend: 0 = Uncategorized; 1 = Conference paper; 2 = Journal article;
@@ -40,7 +40,7 @@ featured: true
 # - name: ""
 #   url: ""
 url_pdf: 'https://infodemiology.jmir.org/2022/2/e33713/PDF'
-url_code: ''
+url_code: 'https://osf.io/ypa75/files/osfstorage/61486f64a436470447fe2c67'
 url_dataset: ''
 url_poster: ''
 url_project: ''

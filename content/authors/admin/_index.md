@@ -1,5 +1,5 @@
 ---
-bio: My research interests include social networks, health and well-being.
+bio: My research interests include social networks, health, well-being, prosocial behavior and pro-environmental behavior.
 education:
   courses:
   - course: PhD in Behavioural Science
