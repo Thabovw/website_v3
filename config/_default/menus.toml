@@ -52,10 +52,20 @@
   parent = "pdfs"
   name = "CV"
   url = "files/CV TJ van Woudenberg 2022.pdf"
-  weight = 100
 
 [[main]]
   parent = "pdfs"
   name = "Dissertation"
   url = "files/Dissertation_T_van_Woudenberg.pdf"
-  weight = 110
+
+[[main]]
+  identifier = "dash"
+  name = "Dashboards"
+  weight = 100
+  hrefTargetBlank = true
+  
+[[main]]
+  parent = "dash"
+  name = "Consent"
+  url = "files/Parentalconsent.html"
+
