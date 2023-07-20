@@ -1,15 +1,19 @@
 ---
-title: Parents’ perceptions of parental consent procedures for social science research in the school context
+title: Understanding the behavioral determinants of adolescents’ water consumption: A cross-country comparative study
 authors:
+- SCM Franken
+- CR Smit
+- RNH de Leeuw
 - TJ van Woudenberg
-- E Rozendaal
+- WJ Burk
+- KE Bevelander
 - M Buijzen
 
-date: 2023-06-21T00:00:00
+date: 2023-12-02T00:00:00
 doi: https://doi.org/10.1080/13645579.2023.2222539
 
 # Schedule page publish date (NOT publication's date).
-publishDate: "2023-06-21T00:00:00Z"
+publishDate: "2023-06-22T00:00:00Z"
 
 # Publication type.
 # Legend: 0 = Uncategorized; 1 = Conference paper; 2 = Journal article;
@@ -18,13 +22,13 @@ publishDate: "2023-06-21T00:00:00Z"
 publication_types: ["2"]
 
 # Publication name and optional abbreviated publication name.
-publication: "*International Journal of Social Research Methodology*"
+publication: "*Dialogues in Health*"
 publication_short: ""
 
-abstract: Typically, parents or other legal guardians are asked for an active declaration that the participation of their child in scientific research is informed and voluntary. However, asking for active parental consent leads to lower quality studies and passive parental consent might be preferable. In this study, we used an online survey in which parents (N=156) watched video vignettes of multiple types of research in the classroom and asked them to rate the appropriateness of using active and passive parental consent. The results indicated that parents perceived active consent procedures as more appropriate in most types of research. However, particularly for secondary school children passive consent was rated as comparably appropriate for several types of research (e.g. observation and questionnaire studies). Other aspects of providing consent are displayed in a supplementary online dashboard. We conclude with recommendations for parental consent procedures for social science research in the school context.
+abstract: Substituting the consumption of sugar-sweetened beverages (SSB) with that of water can have a positive effect on adolescents’ health. However, despite the attention on this topic in the Global North, it is relatively understudied in other regions of the world, such as the Caribbean. To guide the development of future interventions, understanding the factors determining water consumption among Caribbean adolescents is important. This study examined the behavioral determinants of water consumption among adolescents in Aruba (the Caribbean) and compared them to those in the Netherlands (Western Europe). We used a theoretical model that integrates the dominant theoretical perspectives in the field of public health, including theories of planned behavior, social norms, and intrinsic motivation. This cross-country study included 1,584 adolescents from Aruba and the Netherlands (52% girls; M = 12.34 years; SD = 2.14). The data were analyzed using regression analyses. This study found that in Aruba, adolescents with higher scores of intrinsic motivation, friends’ descriptive norms, attitudes, and behavioral control regarding water consumption drank more water. Moreover, the associations between water consumption and both intrinsic motivation as well as friends’ descriptive norms for adolescents in Aruba were stronger than those found in the Netherlands. These associations imply that it is even more important for Aruban adolescents than Dutch adolescents to be intrinsically motivated or to perceive their friends often consuming water to drink more water. The cross-country comparison implies that future interventions in Aruba aimed at increasing adolescents’ water consumption as an alternative to SSB should focus on enhancing their intrinsic motivation while considering their friends’ social norms.
 
 # Summary. An optional shortened abstract.
-summary: The aim of this study was to test difference in active and passive parental consent 
+summary: The aim of this study was to test difference in social network interventions between Aruba and the Netherlands
 
 tags:
 featured: true
@@ -32,8 +36,8 @@ featured: true
 # links:
 # - name: ""
 #   url: ""
-url_pdf: 'https://www.tandfonline.com/doi/epdf/10.1080/13645579.2023.2222539?needAccess=true&role=button'
-url_code: 'https://osf.io/ekagz'
+url_pdf: 'https://www.sciencedirect.com/science/article/pii/S2772653323000059/pdfft?md5=c604e2c14190c765f438267f7ab81820&pid=1-s2.0-S2772653323000059-main.pdf'
+url_code: ''
 url_dataset: ''
 url_poster: ''
 url_project: ''
@@ -44,7 +48,7 @@ url_video: ''
 # Featured image
 # To use, add an image named `featured.jpg/png` to your page's folder. 
 image:
-  caption: 'Image credit: [**Unsplash**](https://unsplash.com/photos/M-eA-JzCWUY)'
+  caption: 'Image credit: [**Unsplash**](https://unsplash.com/photos/WLD2CQuHVhU)'
   focal_point: ""
   preview_only: false
 
