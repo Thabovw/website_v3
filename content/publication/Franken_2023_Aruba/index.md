@@ -1,5 +1,5 @@
 ---
-title: Understanding the behavioral determinants of adolescents’ water consumption: A cross-country comparative study
+title: Understanding the behavioral determinants of adolescents’ water consumption; A cross-country comparative study
 authors:
 - SCM Franken
 - CR Smit
